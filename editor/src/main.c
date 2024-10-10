@@ -1,14 +1,9 @@
 #include <stdio.h>
 #include <dlfcn.h>
+#include <defines.h>
 
 int main() {
-    void* handle = dlopen("../build/libKarnix.so", RTLD_LAZY);
-    if (!handle) {
-        fprintf(stderr, "Failed to load library: %s\n", dlerror());
-        return -1;
-    }
-    printf("Karnix library loaded successfully!\n");
+    karnix_main();
 
-    dlclose(handle);
     return 0;
 }

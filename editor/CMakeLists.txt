@@ -19,10 +19,12 @@ add_custom_command(
 
 add_executable(KarnixEditor ${EDITOR_SOURCES} ${HEADER_FILE} ${SOURCE_FILE})
 
-set(KARNIX_LIB "${CMAKE_SOURCE_DIR}/build/libKarnix.so")
-
-target_link_libraries(KarnixEditor ${KARNIX_LIB} ${SDL2_LIBRARIES} ${Vulkan_LIBRARIES})
+target_link_libraries(KarnixEditor PRIVATE Karnix ${SDL2_LIBRARIES} ${Vulkan_LIBRARIES})
 
 set_target_properties(KarnixEditor PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build"
+    BUILD_WITH_INSTALL_RPATH TRUE
+    INSTALL_RPATH "$ORIGIN"
+    INSTALL_RPATH_USE_LINK_PATH TRUE
+    RPATH "$ORIGIN"
 )

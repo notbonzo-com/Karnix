@@ -18,7 +18,8 @@ add_library(Karnix SHARED ${SOURCES})
 target_link_libraries(Karnix ${SDL2_LIBRARIES} ${Vulkan_LIBRARIES})
 
 set_target_properties(Karnix PROPERTIES
-    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build"
+    OUTPUT_NAME "Karnix"
+    LIBRARY_OUTPUT_DIRECTORY "${BINARY_DIR}"
 )
 
 add_subdirectory(editor)

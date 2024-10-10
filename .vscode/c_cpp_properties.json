@@ -1,0 +1,33 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/editor/include",
+                "/usr/include",
+                "/usr/local/include",
+                "/usr/include/SDL2",
+                "/usr/include/vulkan"
+            ],
+            "defines": [
+                "DEBUG",
+                "_DEBUG",
+                "bool=int",
+                "true=1",
+                "false=0",
+                "nullptr=((void*)0)"
+            ],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu23",
+            "cppStandard": "c++23",
+            "intelliSenseMode": "gcc-x64",
+            "compilerArgs": [
+                "-Wall",
+                "-Wextra",
+                "-Werror"
+            ]
+        }
+    ],
+    "version": 4
+}

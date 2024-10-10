@@ -30,7 +30,7 @@ b8 init_window(HANDLE* window, const char* title, int w, int h)
     win->title = strdup(title);
     win->fullscreen = false;
 
-    LOGD("Initialised window: %dx%d", w, h);
+    LOGI("Initialised window: %dx%d", w, h);
     return true;
 }
 
@@ -47,6 +47,7 @@ void destroy_window(HANDLE* window)
     SDL_DestroyWindow(win->window);
     free(win->title);
     free(win);
+    LOGI("Destroyed window at 0x%llx", window->handle);
 }
 
 b8 window_set_fullscreen(HANDLE* window, b8 fullscreen)

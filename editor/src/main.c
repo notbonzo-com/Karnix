@@ -29,6 +29,7 @@ int main(int, char*[]) {
         }
     }
 
+    destroy_window(&window);
     term_log(nullptr);
     return 0;
 }

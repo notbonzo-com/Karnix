@@ -60,7 +60,7 @@ b8 init_log(LOG_TYPE type, const char* file_name) {
             return false;
         }
     }
-    LOGD("Initialised logging system");
+    LOGI("Initialised logging system");
     return true;
 }
 
@@ -95,6 +95,8 @@ void term_log(const char* logs_folder) {
     }
     free((void*)g_log_file_name);
     g_log_file_name = nullptr;
+
+    LOGI("Terminated logging system");
 }
 
 static char* unknown_time = "unknown_time";

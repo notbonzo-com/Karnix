@@ -11,6 +11,10 @@
         "*.tcc": "c",
         "format": "c",
         "thread": "c",
-        "assert.h": "c"
+        "assert.h": "c",
+        "window.h": "c",
+        "sdl_init.h": "c",
+        "sdl_oldnames.h": "c",
+        "sdl_events.h": "c"
     }
 }

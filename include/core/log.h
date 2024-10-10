@@ -68,6 +68,7 @@ void logfmt(LOG_LEVEL level, const char* function, const char* format, ...);
 // Macros for easier logging
 #define LOG(level, format, ...) logfmt(level, __func__, format, ##__VA_ARGS__)
 #define LOGF(format, ...) logfmt(LOG_FATAL, __func__, format, ##__VA_ARGS__)
+#define LOGE(format, ...) logfmt(LOG_ERROR, __func__, format, ##__VA_ARGS__)
 #define LOGW(format, ...) logfmt(LOG_WARN, __func__, format, ##__VA_ARGS__)
 #define LOGI(format, ...) logfmt(LOG_INFO, __func__, format, ##__VA_ARGS__)
 #define LOGD(format, ...) logfmt(LOG_DEBUG, __func__, format, ##__VA_ARGS__)

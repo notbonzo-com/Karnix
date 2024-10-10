@@ -13,13 +13,13 @@ endif()
 find_package(SDL3 REQUIRED)
 find_package(Vulkan REQUIRED)
 
-include_directories(include ${SDL2_INCLUDE_DIRS} ${Vulkan_INCLUDE_DIRS})
+include_directories(include ${SDL3_INCLUDE_DIRS} ${Vulkan_INCLUDE_DIRS})
 
 file(GLOB_RECURSE SOURCES src/*.c)
 
 add_library(Karnix SHARED ${SOURCES})
 
-target_link_libraries(Karnix ${SDL2_LIBRARIES} ${Vulkan_LIBRARIES})
+target_link_libraries(Karnix ${SDL3_LIBRARIES} ${Vulkan_LIBRARIES})
 
 set_target_properties(Karnix PROPERTIES
     OUTPUT_NAME "Karnix"

@@ -1,0 +1,1 @@
+clear; rm -rf build; cmake . -B build; make -C build; pushd build; ./KarnixEditor; popd

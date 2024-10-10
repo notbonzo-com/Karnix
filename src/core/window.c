@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <SDL3/SDL_events.h>
 
+// FIXME: Mutexes and threading for everything !
+
 b8 init_window(HANDLE* window, const char* title, int w, int h)
 {
     ASSERTF(SDL_WasInit(SDL_INIT_EVENTS | SDL_INIT_VIDEO | SDL_INIT_AUDIO), "SDL3 was not initialised, are you creating a window before initializing the engine?");
@@ -34,7 +36,7 @@ b8 init_window(HANDLE* window, const char* title, int w, int h)
 
 void destroy_window(HANDLE* window)
 {
-    //TODO: Assert if vulkan aint using this
+    // FIXME: Assert if vulkan aint using this
     struct Window* win = H2W(window);
     if (win) {} else {
         LOGE("Not initialised!");

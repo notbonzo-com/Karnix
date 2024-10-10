@@ -1,10 +1,12 @@
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_vulkan.h>
+#include <SDL3/SDL.h>
+#include <SDL3/SDL_vulkan.h>
 #include <vulkan/vulkan.h>
 
-int main(int argc, char *argv[]) {
+#include <defines.h>
 
-            
+int main(int , char *[]) {
+
+
 
     return 0;
 }

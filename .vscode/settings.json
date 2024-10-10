@@ -4,6 +4,7 @@
         "sdl_vulkan.h": "c",
         "stdio.h": "c",
         "vulkan.h": "c",
-        "dlfcn.h": "c"
+        "dlfcn.h": "c",
+        "defines.h": "c"
     }
 }

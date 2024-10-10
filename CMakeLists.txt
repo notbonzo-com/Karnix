@@ -6,7 +6,7 @@ set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/cmake/toolchains/linux_toolchain.c
 
 set(CMAKE_C_STANDARD 23)
 
-find_package(SDL2 REQUIRED)
+find_package(SDL3 REQUIRED)
 find_package(Vulkan REQUIRED)
 
 include_directories(include ${SDL2_INCLUDE_DIRS} ${Vulkan_INCLUDE_DIRS})

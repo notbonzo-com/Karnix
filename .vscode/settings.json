@@ -5,6 +5,11 @@
         "stdio.h": "c",
         "vulkan.h": "c",
         "dlfcn.h": "c",
-        "defines.h": "c"
+        "defines.h": "c",
+        "system_error": "c",
+        "log.h": "c",
+        "*.tcc": "c",
+        "format": "c",
+        "thread": "c"
     }
 }

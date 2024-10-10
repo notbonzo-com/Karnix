@@ -2,8 +2,8 @@
 #include <dlfcn.h>
 #include <defines.h>
 
-int main() {
-    karnix_main();
+int main(int, char*[]) {
+    
 
     return 0;
 }

@@ -10,6 +10,7 @@
         "log.h": "c",
         "*.tcc": "c",
         "format": "c",
-        "thread": "c"
+        "thread": "c",
+        "assert.h": "c"
     }
 }

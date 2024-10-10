@@ -3,7 +3,6 @@
 
 #include <defines.h>
 #include <SDL3/SDL.h>
-#include <core/event.h>
 
 #ifdef __GET_INTERNALS__
 struct Window {

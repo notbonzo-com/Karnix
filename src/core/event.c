@@ -187,7 +187,7 @@ static void decode_sdl_text_input_event(SDL_Event* sdl_event, EVENT* karnix_even
     karnix_event->text_input_event.text[sizeof(karnix_event->text_input_event.text) - 1] = '\0';
 }
 
-b8 decode_sdl_event(SDL_Event* sdl_event, EVENT* karnix_event) {
+b8 event_decode(SDL_Event* sdl_event, EVENT* karnix_event) {
     switch (sdl_event->type) {
         case SDL_EVENT_QUIT:
             karnix_event->category = EVENT_CATEGORY_EXIT;

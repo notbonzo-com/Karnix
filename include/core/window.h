@@ -47,7 +47,7 @@ typedef struct _HANDLE {
  * 
  * @returns `true` if the window is successfully created, `false` otherwise.
  */
-b8 init_window(HANDLE* window, const char* title, u16 w, u16 h);
+b8 init_window(HANDLE* window, const char* title, s32 w, s32 h);
 
 /**
  * @name term_window
@@ -85,7 +85,7 @@ b8 window_set_title(HANDLE* window, const char* title);
  * 
  * @returns `true` if successful, `false` otherwise.
  */
-b8 window_get_position(HANDLE* window, u16* x, u16* y);
+b8 window_get_position(HANDLE* window, s32* x, s32* y);
 
 /**
  * @name window_get_size
@@ -96,7 +96,7 @@ b8 window_get_position(HANDLE* window, u16* x, u16* y);
  * 
  * @returns `true` if successful, `false` otherwise.
  */
-b8 window_get_size(HANDLE* window, u16* w, u16* h);
+b8 window_get_size(HANDLE* window, s32* w, s32* h);
 
 /**
  * @name window_get_fullscreen
@@ -116,7 +116,7 @@ b8 window_get_fullscreen(HANDLE* window);
  * 
  * @returns `true` if successful, `false` otherwise.
  */
-b8 window_set_position(HANDLE* window, u16 x, u16 y);
+b8 window_set_position(HANDLE* window, s32 x, s32 y);
 
 /**
  * @name window_set_size
@@ -127,6 +127,6 @@ b8 window_set_position(HANDLE* window, u16 x, u16 y);
  * 
  * @returns `true` if successful, `false` otherwise.
  */
-b8 window_set_size(HANDLE* window, u16 w, u16 h);
+b8 window_set_size(HANDLE* window, s32 w, s32 h);
 
 #endif // _WINDOW_H

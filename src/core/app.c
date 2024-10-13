@@ -14,7 +14,7 @@ static f64 calculate_delta_time() {
     return delta_time;
 }
 
-b8 init_app(app_config_t* config, const char* name, u16 w, u16 h)
+b8 init_app(app_config_t* config, const char* name, s32 w, s32 h)
 {
     if (current_app != nullptr) {
         LOGE("Application already initialised");

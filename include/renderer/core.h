@@ -5,6 +5,17 @@
 #include <core/window.h>
 #include <core/app.h>
 
+#ifdef __GET_INTERNALS__
+#define VK_CHECK(x)                                           \
+    do {                                                      \
+        VkResult err = x;                                     \
+        if (err) {                                            \
+            LOGE("Vulkan error: %d", err);                    \
+            return false;                                     \
+        }                                                     \
+    } while (0)
+#endif
+
 typedef struct renderer_packet {
     f32 delta_time;
 } renderer_packet_t;

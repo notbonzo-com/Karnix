@@ -7,7 +7,7 @@
 
 // FIXME: Mutexes and threading for everything !
 
-b8 init_window(HANDLE* window, const char* title, int w, int h)
+b8 init_window(HANDLE* window, const char* title, u16 w, u16 h)
 {
     ASSERTF(SDL_WasInit(SDL_INIT_EVENTS | SDL_INIT_VIDEO | SDL_INIT_AUDIO), "SDL3 was not initialised, are you creating a window before initializing the engine?");
     ASSERTF(window->handle == 0, "Window already initialised");
@@ -36,7 +36,7 @@ b8 init_window(HANDLE* window, const char* title, int w, int h)
 
 void term_window(HANDLE* window)
 {
-    // FIXME: Assert if vulkan aint using this
+    // FIXME: Assert if vulkan au16 using this
     struct Window* win = H2W(window);
     if (win) {} else {
         LOGE("Not initialised!");
@@ -97,7 +97,7 @@ b8 window_get_fullscreen(HANDLE* window)
     return false;
 }
 
-b8 window_set_position(HANDLE* window, int x, int y)
+b8 window_set_position(HANDLE* window, u16 x, u16 y)
 {
     ASSERTF(window->handle != 0, "Window not initialised");
     if (SDL_SetWindowPosition(H2W(window)->window, x, y) == 0) {
@@ -107,7 +107,7 @@ b8 window_set_position(HANDLE* window, int x, int y)
     return true;
 }
 
-b8 window_set_size(HANDLE* window, int w, int h)
+b8 window_set_size(HANDLE* window, u16 w, u16 h)
 {
     if (SDL_SetWindowSize(H2W(window)->window, w, h) == 0) {
         LOGW("Failed to set window size: %s", SDL_GetError());

@@ -20,7 +20,7 @@
 typedef struct Window {
     SDL_Window *window;     ///< Pointer to the SDL window.
     SDL_Renderer *renderer; ///< Pointer to the SDL renderer.
-    int w, h;               ///< Width and height of the window.
+    u16 w, h;               ///< Width and height of the window.
     char* title;            ///< Title of the window.
     b8 fullscreen;          ///< Indicates if the window is in fullscreen mode.
 } Window_t;
@@ -47,7 +47,7 @@ typedef struct _HANDLE {
  * 
  * @returns `true` if the window is successfully created, `false` otherwise.
  */
-b8 init_window(HANDLE* window, const char* title, int w, int h);
+b8 init_window(HANDLE* window, const char* title, u16 w, u16 h);
 
 /**
  * @name term_window
@@ -85,7 +85,7 @@ b8 window_set_title(HANDLE* window, const char* title);
  * 
  * @returns `true` if successful, `false` otherwise.
  */
-b8 window_get_position(HANDLE* window, int* x, int* y);
+b8 window_get_position(HANDLE* window, u16* x, u16* y);
 
 /**
  * @name window_get_size
@@ -96,7 +96,7 @@ b8 window_get_position(HANDLE* window, int* x, int* y);
  * 
  * @returns `true` if successful, `false` otherwise.
  */
-b8 window_get_size(HANDLE* window, int* w, int* h);
+b8 window_get_size(HANDLE* window, u16* w, u16* h);
 
 /**
  * @name window_get_fullscreen
@@ -116,7 +116,7 @@ b8 window_get_fullscreen(HANDLE* window);
  * 
  * @returns `true` if successful, `false` otherwise.
  */
-b8 window_set_position(HANDLE* window, int x, int y);
+b8 window_set_position(HANDLE* window, u16 x, u16 y);
 
 /**
  * @name window_set_size
@@ -127,6 +127,6 @@ b8 window_set_position(HANDLE* window, int x, int y);
  * 
  * @returns `true` if successful, `false` otherwise.
  */
-b8 window_set_size(HANDLE* window, int w, int h);
+b8 window_set_size(HANDLE* window, u16 w, u16 h);
 
 #endif // _WINDOW_H

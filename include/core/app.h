@@ -16,7 +16,7 @@ typedef struct app_config
 /**
  * @warning Assumes that `config` is allocated by caller, unlike init_window!
  */
-b8 init_app(app_config_t* config, const char* name, int w, int h);
+b8 init_app(app_config_t* config, const char* name, u16 w, u16 h);
 void term_app();
 
 typedef struct app_event {

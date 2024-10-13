@@ -54,7 +54,7 @@ b8 app_run(app_event_t* event)
 
     SDL_Event sdl_event;
     while (SDL_PollEvent(&sdl_event)) {
-        if (decode_sdl_event(&sdl_event, &event->event)) {
+        if (event_decode(&sdl_event, &event->event)) {
             return true;
         }
     }

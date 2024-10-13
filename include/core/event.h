@@ -222,6 +222,6 @@ typedef struct EVENT {
     };
 } EVENT;
 
-b8 decode_sdl_event(SDL_Event* sdl_event, EVENT* custom_event);
+b8 event_decode(SDL_Event* sdl_event, EVENT* custom_event);
 
 #endif // _EVENT_H

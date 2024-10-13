@@ -17,13 +17,13 @@
  * Contains the SDL window and renderer along with basic window properties like
  * dimensions, title, and fullscreen status.
  */
-struct Window {
+typedef struct Window {
     SDL_Window *window;     ///< Pointer to the SDL window.
     SDL_Renderer *renderer; ///< Pointer to the SDL renderer.
     int w, h;               ///< Width and height of the window.
     char* title;            ///< Title of the window.
     b8 fullscreen;          ///< Indicates if the window is in fullscreen mode.
-};
+} Window_t;
 
 #define H2W(h) ((struct Window*)h->handle)              ///< Macro to convert HANDLE to Window pointer.
 #define W2H(w) ((HANDLE){ .handle = ((void*)w) })       ///< Macro to convert Window pointer to HANDLE.
@@ -33,7 +33,7 @@ struct Window {
  * @struct HANDLE
  * @brief Opaque handle structure for window management.
  */
-typedef struct {
+typedef struct _HANDLE {
     u64 handle;         ///< Modifiable pointer value.
 } HANDLE;
 
@@ -50,11 +50,11 @@ typedef struct {
 b8 init_window(HANDLE* window, const char* title, int w, int h);
 
 /**
- * @name destroy_window
+ * @name term_window
  * @brief Destroys the specified window and cleans up resources.
  * @param window - Pointer to the HANDLE of the window to be destroyed.
  */
-void destroy_window(HANDLE* window);
+void term_window(HANDLE* window);
 
 /**
  * @name window_set_fullscreen

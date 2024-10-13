@@ -1,35 +1,41 @@
 #include <stdio.h>
-#include <SDL3/SDL.h>
 
 #include <defines.h>
 #include <core/log.h>
 #include <core/assert.h>
 #include <core/window.h>
+#include <core/app.h>
 
-
-int main(int, char*[]) {
+int main() {
     init_log(LOG_TYPE_STDOUT, nullptr);
 
-    if (SDL_Init(SDL_INIT_EVENTS | SDL_INIT_VIDEO | SDL_INIT_AUDIO) == 0) {
-        printf("Failed to initialize SDL: %s\n", SDL_GetError());
-        return -1;
-    }
-    HANDLE window = {0};
-    if (init_window(&window, "Editor", 1280, 720) == false) {
+    app_config_t config = {0};
+    if (init_app(&config, "Editor", 1280, 720) == false) {
         return -1;
     }
 
-    b8 running = true;
-    SDL_Event event;
-    while (running) {
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_EVENT_QUIT) {
-                running = false;
-            }
+    struct app_event event;
+    while (event.event.category != EVENT_CATEGORY_EXIT) {
+        if (app_run(&event) == false) {
+            // rendering
         }
+
+        switch (event.event.category) {
+            case EVENT_CATEGORY_KEY:
+                switch (event.event.key_event.type)
+                {
+                    case KEY_EVENT_DOWN:
+                        printf("Key down: %d\n", event.event.key_event.scancode);
+                        break;
+                    case KEY_EVENT_UP:
+                        printf("Key up: %d\n", event.event.key_event.scancode);
+                        break;
+                }
+        }
+
     }
 
-    destroy_window(&window);
+    term_app();
     term_log(nullptr);
     return 0;
 }

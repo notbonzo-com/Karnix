@@ -34,7 +34,7 @@ b8 init_window(HANDLE* window, const char* title, int w, int h)
     return true;
 }
 
-void destroy_window(HANDLE* window)
+void term_window(HANDLE* window)
 {
     // FIXME: Assert if vulkan aint using this
     struct Window* win = H2W(window);

@@ -15,6 +15,9 @@
         "window.h": "c",
         "sdl_init.h": "c",
         "sdl_oldnames.h": "c",
-        "sdl_events.h": "c"
+        "sdl_events.h": "c",
+        "app.h": "c",
+        "chrono": "c",
+        "functional": "c"
     }
 }

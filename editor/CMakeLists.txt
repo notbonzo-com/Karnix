@@ -1,7 +1,8 @@
 # editor/CMakeLists.txt
 cmake_minimum_required(VERSION 3.16)
 
-file(GLOB EDITOR_SOURCES src/*.c)
+file(GLOB_RECURSE EDITOR_SOURCES src/*.c)
+file(GLOB_RECURSE EDITOR_SOURCES_CXX src/*.cpp)
 
 include_directories(include ${CMAKE_SOURCE_DIR}/include)
 
@@ -17,7 +18,7 @@ add_custom_command(
     COMMENT "Embedding editor resources..."
 )
 
-add_executable(KarnixEditor ${EDITOR_SOURCES} ${HEADER_FILE} ${SOURCE_FILE})
+add_executable(KarnixEditor ${EDITOR_SOURCES} ${EDITOR_SOURCES_CXX} ${HEADER_FILE} ${SOURCE_FILE})
 
 target_link_libraries(KarnixEditor PRIVATE Karnix ${SDL2_LIBRARIES} ${Vulkan_LIBRARIES})
 

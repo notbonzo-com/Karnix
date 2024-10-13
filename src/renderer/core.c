@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include <core/log.h>
+#include <core/assert.h>
 #include <core/app.h>
 #define __GET_INTERNALS__
 #include <renderer/core.h>
@@ -14,6 +15,29 @@ struct {
     u64 frame_number;
     vulkan_context_t* vk;
 } backend;
+
+VKAPI_ATTR VkBool32 debug_callback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType,
+                            const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void*)
+{
+    switch (messageSeverity) {
+        case VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT:
+            LOGE(pCallbackData->pMessage);
+            break;
+        case VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT:
+            LOGW(pCallbackData->pMessage);
+            break;
+        case VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT:
+            LOGI(pCallbackData->pMessage);
+            break;
+        case VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT:
+            LOGD(pCallbackData->pMessage);
+            break;
+        default:
+            LOGW(pCallbackData->pMessage);
+            break;
+    }
+    return VK_FALSE;
+}
 
 b8 init_renderer(app_config_t* state)
 {
@@ -38,8 +62,9 @@ b8 init_renderer(app_config_t* state)
     };
     create_info.enabledExtensionCount = (sizeof(extensions) / sizeof(extensions[0]));
 #ifdef _DEBUG
+    LOGD("Enabled extensions:");
     for (u32 i = 0; i < create_info.enabledExtensionCount; i++) {
-        LOGD("Enabled extension: %s", extensions[i]);
+        LOGD(extensions[i]);
     }
 #endif
     create_info.ppEnabledExtensionNames = extensions;
@@ -81,12 +106,37 @@ b8 init_renderer(app_config_t* state)
 
     VK_CHECK(vkCreateInstance(&create_info, nullptr, &backend.vk->instance));
 
+#ifdef _DEBUG
+    u32 log_level = VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT \
+                    | VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT ;//| VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT;
+
+    VkDebugUtilsMessengerCreateInfoEXT debug_info = { VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT };
+    debug_info.messageSeverity = log_level;
+    debug_info.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT
+                             | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
+    debug_info.pfnUserCallback = debug_callback;
+    debug_info.pUserData = nullptr;
+
+    PFN_vkCreateDebugUtilsMessengerEXT func = (PFN_vkCreateDebugUtilsMessengerEXT)
+                                        vkGetInstanceProcAddr(backend.vk->instance, "vkCreateDebugUtilsMessengerEXT");
+    ASSERT(func != nullptr, "Failed to get vkCreateDebugUtilsMessengerEXT");
+    VK_CHECK(func(backend.vk->instance, &debug_info, nullptr, &backend.vk->debug_messenger));
+#endif
+
     LOGI("Initialised renderer with instance 0x%llx", backend.vk->instance);
     return true;
 }
 
 void term_renderer()
 {
+#ifdef _DEBUG
+    if (backend.vk->debug_messenger) {
+        PFN_vkDestroyDebugUtilsMessengerEXT destroy_func = (PFN_vkDestroyDebugUtilsMessengerEXT)
+            vkGetInstanceProcAddr(backend.vk->instance, "vkDestroyDebugUtilsMessengerEXT");
+        ASSERT(destroy_func != nullptr, "Failed to get vkDestroyDebugUtilsMessengerEXT");
+        destroy_func(backend.vk->instance, backend.vk->debug_messenger, nullptr);
+    }
+#endif
     vkDestroyInstance(backend.vk->instance, nullptr);
     free(backend.vk);
     LOGI("Terminated renderer");

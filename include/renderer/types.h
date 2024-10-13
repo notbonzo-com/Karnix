@@ -7,6 +7,9 @@
 
 typedef struct vulkan_context {
     VkInstance instance;
+#ifdef _DEBUG
+    VkDebugUtilsMessengerEXT debug_messenger;
+#endif
 } vulkan_context_t;
 
 #endif // _RENDERER_TYPES_H

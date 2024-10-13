@@ -1,5 +1,6 @@
 #define __GET_INTERNALS__
 #include <core/window.h>
+#undef __GET_INTERNALS__
 #include <core/assert.h>
 #include <core/log.h>
 #include <stdlib.h>

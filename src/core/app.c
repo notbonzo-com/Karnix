@@ -1,6 +1,7 @@
 #include <core/app.h>
 #include <core/window.h>
 #include <core/log.h>
+#include <renderer/core.h>
 #include <stdlib.h>
 
 #define FRAME_DELAY 0.001 // (1.0 / 1000)
@@ -33,12 +34,21 @@ b8 init_app(app_config_t* config, const char* name, s32 w, s32 h)
         return false;
     }
     config->last_frame_time = (f64)SDL_GetPerformanceCounter() / (f64)SDL_GetPerformanceFrequency();
+
+    if (init_renderer(current_app) == false) {
+        LOGE("Failed to initialise renderer");
+        return false;
+    }
+
+    LOGI("Initialised application: %s", config->name);
     return true;
 }
 
 void term_app()
 {
+    LOGI("Terminating application: %s", current_app->name);
     free(current_app->name);
+    term_renderer();
     term_window(&current_app->window);
     current_app = nullptr;
 }

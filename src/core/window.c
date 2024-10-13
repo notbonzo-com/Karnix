@@ -37,10 +37,10 @@ b8 init_window(HANDLE* window, const char* title, s32 w, s32 h)
 
 void term_window(HANDLE* window)
 {
-    // FIXME: Assert if vulkan as32 using this
+    // FIXME: Assert if vulkan aint using this
     struct Window* win = H2W(window);
     if (win) {} else {
-        LOGE("Not initialised!");
+        LOGE("Trying to destroy window that was not initialised!");
         return;
     }
 

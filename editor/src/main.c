@@ -19,20 +19,7 @@ int main() {
         if (app_run(&event) == false) {
             // rendering
         }
-
-        switch (event.event.category) {
-            case EVENT_CATEGORY_KEY:
-                switch (event.event.key_event.type)
-                {
-                    case KEY_EVENT_DOWN:
-                        printf("Key down: %d\n", event.event.key_event.scancode);
-                        break;
-                    case KEY_EVENT_UP:
-                        printf("Key up: %d\n", event.event.key_event.scancode);
-                        break;
-                }
-        }
-
+        LOGD("Frames per second: %f", event.fps);
     }
 
     term_app();

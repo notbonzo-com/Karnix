@@ -25,10 +25,9 @@ typedef enum mouse_event_type {
     MOUSE_EVENT_NONE,
     MOUSE_EVENT_MOVE,
     MOUSE_EVENT_CLICK,
-    MOUSE_EVENT_BUTTON_DOWN,
-    MOUSE_EVENT_BUTTON_UP,
     MOUSE_EVENT_MIDDLE_CLICK,
     MOUSE_EVENT_RIGHT_CLICK,
+    MOUSE_EVENT_BUTTON_UP,
 } mouse_event_type_t;
 
 typedef enum window_event_type {

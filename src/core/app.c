@@ -3,6 +3,8 @@
 #include <core/log.h>
 #include <stdlib.h>
 
+#define FRAME_DELAY 0.001 // (1.0 / 1000)
+
 static app_config_t* current_app = nullptr;
 
 static f64 calculate_delta_time() {
@@ -44,6 +46,10 @@ void term_app()
 b8 app_run(app_event_t* event)
 {
     event->delta_time = calculate_delta_time();
+    if (event->delta_time < FRAME_DELAY) {
+        SDL_Delay((u32)((FRAME_DELAY - event->delta_time) * 1000)); 
+        event->delta_time = FRAME_DELAY;
+    }
     event->event.category = EVENT_CATEGORY_NONE;
 
     SDL_Event sdl_event;
@@ -52,5 +58,7 @@ b8 app_run(app_event_t* event)
             return true;
         }
     }
+    event->fps = 1.0 / event->delta_time;
+
     return false;
 }

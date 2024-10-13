@@ -151,7 +151,7 @@ static void decode_sdl_mouse_event(SDL_Event* sdl_event, EVENT* karnix_event) {
 
         if (sdl_event->button.button == SDL_BUTTON_LEFT) {
             karnix_event->mouse_event.type = (sdl_event->type == SDL_EVENT_MOUSE_BUTTON_DOWN) 
-                                             ? MOUSE_EVENT_BUTTON_DOWN 
+                                             ? MOUSE_EVENT_CLICK 
                                              : MOUSE_EVENT_BUTTON_UP;
         } else if (sdl_event->button.button == SDL_BUTTON_MIDDLE) {
             karnix_event->mouse_event.type = (sdl_event->type == SDL_EVENT_MOUSE_BUTTON_DOWN) 

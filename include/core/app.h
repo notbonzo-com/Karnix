@@ -22,6 +22,7 @@ void term_app();
 typedef struct app_event {
     EVENT event;
     f32 delta_time;
+    f32 fps;
 } app_event_t;
 
 b8 app_run(app_event_t* event);

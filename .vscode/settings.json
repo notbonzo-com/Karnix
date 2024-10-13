@@ -18,6 +18,7 @@
         "sdl_events.h": "c",
         "app.h": "c",
         "chrono": "c",
-        "functional": "c"
+        "functional": "c",
+        "core.h": "c"
     }
 }

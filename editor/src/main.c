@@ -6,6 +6,8 @@
 #include <core/window.h>
 #include <core/app.h>
 
+#include <renderer/core.h>
+
 int main() {
     init_log(LOG_TYPE_STDOUT, nullptr);
 
@@ -17,9 +19,24 @@ int main() {
     struct app_event event;
     while (event.event.category != EVENT_CATEGORY_EXIT) {
         if (app_run(&event) == false) {
-            // rendering
+            static renderer_packet_t packed = {0};
+            packed.delta_time = event.delta_time;
+
+            // draw stuff
+
+            renderer_present(&packed);
         }
-        LOGD("Frames per second: %f", event.fps);
+        switch (event.event.category) {
+            case EVENT_CATEGORY_KEY:
+                if (event.event.key_event.type == KEY_EVENT_DOWN) {
+                    if (event.event.key_event.key == KEY_ESCAPE) {
+                        event.event.category = EVENT_CATEGORY_EXIT;
+                    }
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     term_app();

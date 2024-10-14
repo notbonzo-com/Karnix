@@ -129,14 +129,12 @@ b8 init_renderer(app_config_t* state)
 
 void term_renderer()
 {
-#ifdef _DEBUG
-    if (backend.vk->debug_messenger) {
+    if (backend.vk->debug_messenger != nullptr) {
         PFN_vkDestroyDebugUtilsMessengerEXT destroy_func = (PFN_vkDestroyDebugUtilsMessengerEXT)
             vkGetInstanceProcAddr(backend.vk->instance, "vkDestroyDebugUtilsMessengerEXT");
         ASSERT(destroy_func != nullptr, "Failed to get vkDestroyDebugUtilsMessengerEXT");
         destroy_func(backend.vk->instance, backend.vk->debug_messenger, nullptr);
     }
-#endif
     vkDestroyInstance(backend.vk->instance, nullptr);
     free(backend.vk);
     LOGI("Terminated renderer");
